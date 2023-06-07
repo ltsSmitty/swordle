@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.29.12",
     "@types/eslint": "^8.21.3",
     "@types/node": "20.2.5",
     "@types/prettier": "^2.7.2",
