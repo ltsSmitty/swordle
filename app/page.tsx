@@ -11,6 +11,7 @@ import { fetchSolution } from "./utils/fetchSolution";
 import { useEffect } from "react";
 import { Spoiler } from "./Components/Spoiler";
 import { LetterRow } from "./Components/LetterRow";
+import { GithubLink } from "./Components/GithubLink";
 
 export default function Home() {
 	const completed = useCompleted();
@@ -44,6 +45,7 @@ export default function Home() {
 					You completed this Swordle in {guessNumber} guesses!
 				</div>
 			)}
+			<GithubLink />
 		</main>
 	);
 }
