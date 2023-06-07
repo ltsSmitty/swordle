@@ -1,9 +1,10 @@
-# SWorlde - A Wordle Clone
+# [SWordle - A Wordle Clone](https://swordle-five.vercel.app/)
 
 I wanted to see what it'd be like to make a Wordle clone, and this is my go at it.
 
-## Notes
+## Notes, I guess
 
 * This pulls from a Wordle API so the word matches the one from the NYT.
-* Built with React & Tailwind, nothing fancy to see here.
+* Built with TS, React & Tailwind; nothing fancy to see here.
+
 
