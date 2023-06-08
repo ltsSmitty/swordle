@@ -40,12 +40,10 @@ export default function Home() {
 					<LetterRow row={4} />
 					<LetterRow row={5} />
 				</div>
-				<div className="w-full max-w-[500px]">
-					<Keyboard />
-				</div>
+				<div className="w-full max-w-[500px]">{!completed && <Keyboard />}</div>
 				{completed && (
 					<div className="py-2 text-lg">
-						You completed this Swordle in {guessNumber} guesses!
+						You completed this Swordle in <b>{guessNumber} guesses</b>!
 					</div>
 				)}
 				<GithubLink />
