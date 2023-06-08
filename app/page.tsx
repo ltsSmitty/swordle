@@ -28,24 +28,28 @@ export default function Home() {
 	}, [setAnswer]);
 
 	return (
-		<main className="flex min-h-screen flex-col items-center bg-stone-50  pt-3">
-			<KeyboardPressHandler />
-			<Spoiler message="Peek the answer..." secret={answer || ""} />
-			<div className="">
-				<LetterRow row={0} />
-				<LetterRow row={1} />
-				<LetterRow row={2} />
-				<LetterRow row={3} />
-				<LetterRow row={4} />
-				<LetterRow row={5} />
-				<Keyboard />
-			</div>
-			{completed && (
-				<div className="py-2 text-lg">
-					You completed this Swordle in {guessNumber} guesses!
+		<main className="absolute h-full w-full">
+			<div className="flex h-full w-full flex-col items-center bg-stone-50  pt-3">
+				<KeyboardPressHandler />
+				<Spoiler message="Peek the answer..." secret={answer || ""} />
+				<div className="">
+					<LetterRow row={0} />
+					<LetterRow row={1} />
+					<LetterRow row={2} />
+					<LetterRow row={3} />
+					<LetterRow row={4} />
+					<LetterRow row={5} />
 				</div>
-			)}
-			<GithubLink />
+				<div className="w-full max-w-[500px]">
+					<Keyboard />
+				</div>
+				{completed && (
+					<div className="py-2 text-lg">
+						You completed this Swordle in {guessNumber} guesses!
+					</div>
+				)}
+				<GithubLink />
+			</div>
 		</main>
 	);
 }

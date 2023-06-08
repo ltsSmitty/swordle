@@ -42,8 +42,9 @@ const LetterKey = ({ letter }: { letter: string }) => {
 	return (
 		<button
 			className={cn(
-				"flex h-14 w-9 items-center justify-center rounded-md  bg-stone-300 text-stone-800",
-				buttonBG()
+				"flex h-14 flex-1 items-center justify-center rounded-md  bg-stone-300 text-stone-800",
+				buttonBG(),
+				"mr-[6px] last-of-type:mr-0"
 			)}
 			onClick={() => onButtonPress(letter)}
 		>
@@ -59,7 +60,8 @@ const EnterKey = () => {
 
 	return (
 		<button
-			className="flex h-14 w-16 items-center justify-center rounded-md  bg-stone-300 text-stone-800"
+			className="flex h-14 flex-[1.5] items-center justify-center rounded-md  bg-stone-300 text-stone-800 "
+			style={{ margin: "0 6px 0 0" }}
 			onClick={submitWord}
 		>
 			<div className="  ">
@@ -79,7 +81,7 @@ const BackspaceKey = () => {
 
 	return (
 		<button
-			className="flex h-14 w-16 items-center justify-center rounded-md bg-stone-300   text-stone-800"
+			className="flex h-14 flex-[1.5] items-center justify-center rounded-md bg-stone-300   text-stone-800"
 			onClick={onBackspacePress}
 		>
 			<div className="  ">
@@ -95,18 +97,20 @@ const row3 = "zxcvbnm";
 
 const Keyboard = () => {
 	return (
-		<div className="flex flex-col items-center justify-between gap-2 ">
-			<div className="flex flex-row gap-2 ">
+		<div className="mx-2 items-center justify-between">
+			<div className="mb-2 flex w-full flex-row last:m-0">
 				{row1.split("").map((letter) => (
 					<LetterKey key={letter} letter={letter} />
 				))}
 			</div>
-			<div className="flex flex-row gap-2">
+			<div className="mb-2 flex flex-row">
+				<div className="flex-[0.5]"></div>
 				{row2.split("").map((letter) => (
 					<LetterKey key={letter} letter={letter} />
 				))}
+				<div className="flex-[0.5]"></div>
 			</div>
-			<div className="flex flex-row gap-2">
+			<div className="mb-2 flex flex-row">
 				<EnterKey />
 				{row3.split("").map((letter) => (
 					<LetterKey key={letter} letter={letter} />

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const GithubLink = () => {
 	return (
-		<div className=" absolute bottom-1 right-1">
+		<div className=" absolute bottom-2 right-2">
 			<a
 				href="https://github.com/ltsSmitty/swordle"
 				target="_blank"

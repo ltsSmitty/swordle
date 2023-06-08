@@ -69,7 +69,7 @@ const LetterBox = ({
 	return (
 		<div
 			className={cn(
-				"flex h-14 w-14 items-center justify-center  border-2 text-stone-800 ",
+				"flex h-14 w-14 items-center  justify-center border-2 text-stone-800",
 				borderColor,
 				backgroundColor,
 				transitionCN,
