@@ -22,8 +22,8 @@ export const matchLetterColor = (
             return letters.map((l, letterIndex) => {
                 if (l.toLocaleLowerCase() !== letter) return "notGuessed";
                 return doesLetterMatch({
-                    guess: l,
-                    guessIndex: letterIndex,
+                    submittedWord: guess,
+                    thisLetterIdx: letterIndex,
                     answer,
                 });
             });
