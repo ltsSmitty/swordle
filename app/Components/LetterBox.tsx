@@ -17,7 +17,8 @@ const LetterBox = ({
 	index: { row: number; column: number };
 	submitted: boolean;
 }) => {
-	const letter = useGuesses()[index.row]?.[index.column];
+	const guess = useGuesses()[index.row];
+	const letter = guess?.[index.column];
 	const answer = useAnswer();
 
 	const borderColor = letter ? "border-stone-400" : "border-stone-300";
@@ -25,8 +26,8 @@ const LetterBox = ({
 	if (!submitted || !letter) backgroundColor = "bg-stone-50";
 	else {
 		const status = doesLetterMatch({
-			guess: letter,
-			guessIndex: index.column,
+			submittedWord: guess,
+			thisLetterIdx: index.column,
 			answer,
 		});
 		switch (status) {
@@ -85,20 +86,58 @@ const LetterBox = ({
 	);
 };
 
-export const doesLetterMatch = ({
-	guess,
-	guessIndex,
-	answer,
-}: {
-	guess: string;
-	guessIndex: number;
+export const doesLetterMatch = (props: {
+	submittedWord: string;
+	thisLetterIdx: number;
 	answer: string;
 }): LetterStatus => {
-	const letters = answer.split("");
-	if (letters[guessIndex]?.toLocaleLowerCase() === guess[0].toLocaleLowerCase())
-		return "correct";
-	if (letters.includes(guess[0])) return "wrongLocation";
-	return "incorrect";
+	const { submittedWord, thisLetterIdx, answer } = props;
+
+	if (!submittedWord) return "empty";
+
+	const answerLetters = answer.split("").map((l) => l.toLocaleLowerCase());
+	const guessLetters = submittedWord
+		.split("")
+		.map((l) => l.toLocaleLowerCase());
+	const thisLetter = guessLetters[thisLetterIdx];
+
+	const numberOfTimesThisLetterAppearsInAnswer = answerLetters.filter(
+		(l) => l === thisLetter
+	).length;
+
+	const isThisGuessInTheRightPlace =
+		answerLetters[thisLetterIdx] === thisLetter;
+
+	const indicesOfThisLetterInGuess = guessLetters
+		.map((l, i) => (l === thisLetter ? i : -1))
+		.filter((i) => i !== -1);
+
+	if (numberOfTimesThisLetterAppearsInAnswer === 0) return "incorrect";
+
+	if (isThisGuessInTheRightPlace) return "correct";
+	else {
+		// this instance of this letter is not in the right place, but this letter is in the answer.
+		// before just saying it's in the wrong place, need to check if any of the other instances of this letter are in the right place.
+		const numberOfInstancesOfThisLetterInRightPlace = indicesOfThisLetterInGuess
+			.map((i) => answerLetters[i] === thisLetter)
+			.map((b) => (b ? 1 : 0))
+			.reduce((a: number, b: number) => a + b, 0);
+
+		const indexOfThisLetterInGuess =
+			indicesOfThisLetterInGuess.indexOf(thisLetterIdx);
+
+		if (
+			numberOfInstancesOfThisLetterInRightPlace ===
+			numberOfTimesThisLetterAppearsInAnswer
+		)
+			return "incorrect";
+
+		if (indexOfThisLetterInGuess >= numberOfTimesThisLetterAppearsInAnswer)
+			return "incorrect";
+		else return "wrongLocation";
+	}
+
+	//
 };
 
 export default LetterBox;
